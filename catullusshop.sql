@@ -7,7 +7,8 @@
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+-- การตั้งค่า SQL_MODE จะถูกจัดการโดย MariaDB server.
+-- โปรดตรวจสอบให้แน่ใจว่าได้ตั้งค่า sql_mode="" ใน /etc/my.cnf.d/server.cnf
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -33,8 +34,8 @@ CREATE TABLE `bank` (
   `lname` varchar(100) NOT NULL,
   `bnum` varchar(50) NOT NULL,
   `tname` varchar(100) NOT NULL,
-  `created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP, -- แก้ไขตรงนี้: เพิ่ม NULL
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` datetime NULL DEFAULT NULL, -- แก้ไข: เป็น DATETIME ที่รับค่า NULL และค่าเริ่มต้นเป็น NULL
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- แก้ไข: เป็น TIMESTAMP ที่รับค่า NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -188,8 +189,8 @@ CREATE TABLE `kbank_trans` (
   `qr` varchar(255) NOT NULL,
   `ref` varchar(255) NOT NULL,
   `sender` varchar(100) DEFAULT NULL,
-  `created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP, -- แก้ไขตรงนี้: เพิ่ม NULL
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` datetime NULL DEFAULT NULL, -- แก้ไข: เป็น DATETIME ที่รับค่า NULL และค่าเริ่มต้นเป็น NULL
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- แก้ไข: เป็น TIMESTAMP ที่รับค่า NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -458,4 +459,4 @@ COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
